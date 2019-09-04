@@ -112,13 +112,16 @@ var clientsnpr =
 		.station-container{padding:30px;padding-bottom:40px;}
 		.station-logo{text-align:center;}
 		@media only screen and (min-width: 601px) {	
-			.station-logo img{width:250px;}
+			.station-logo img{width:200px;}
 		} 
 		@media only screen and (max-width: 600px) {			
 			.station-logo img{width:70%;}
 		} 
 		@media print {		
-			.station-logo img{width:70%;}		
+            body{background:#ffffff;padding:0;}
+            #stations{border: 0;}
+			.station-container{padding:10px;}
+			.station-logo img{width:25%;}
 		}
 		.station-title{font-weight:bold;text-align:center;color: #333;font-weight: 400;font-family:arial;}
 		.station-address{text-align:center;font-size:14px;padding-bottom:20px;color:#767676;font-family:arial;}

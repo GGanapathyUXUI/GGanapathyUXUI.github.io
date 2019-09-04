@@ -8,10 +8,10 @@
 <script >
 	$.getJSON("https://gganapathyuxui.github.io/CDPStations.json", function (data) {
 
-            var clientsnpr = [];      // THE ARRAY TO STORE JSON ITEMS.
-            $.each(data, function (index, value) {
-                clientsnpr.push(value);       // PUSH THE VALUES INSIDE THE ARRAY.
-            });
+		var clientsnpr = [];      
+		$.each(data, function (index, value) {
+			clientsnpr.push(value);    
+		});
 
 //Rendering data from JSON Object
         $(document).ready(function(){
@@ -54,11 +54,17 @@
 		.station-container{padding:30px;padding-bottom:40px;}
 		.station-logo{text-align:center;}
 		@media only screen and (min-width: 601px) {	
-			.station-logo img{height:120px;}
+			.station-logo img{width:200px;}
 		} 
 		@media only screen and (max-width: 600px) {			
 			.station-logo img{width:70%;}
 		} 
+		@media print {		
+            body{background:#ffffff;padding:0;}
+            #stations{border: 0;}
+			.station-container{padding:10px;}
+			.station-logo img{width:25%;}
+		}
 		.station-title{font-weight:bold;text-align:center;color: #333;font-weight: 400;font-family:arial;}
 		.station-address{text-align:center;font-size:14px;padding-bottom:20px;color:#767676;font-family:arial;}
 		.station-description{font-family: Georgia,serif;font-size:17px;line-height:1.7;}
