@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PBS Client Stations</title>
+<meta name="description" content="PBS Client Stations">
+<meta name="keywords" content="DPTV, WTVS-Detroit, Wyoming PBS, KCWS, KLVX, Vegas PBS, KUHT, HPMF-Houston Public Media, SOPTV, Southern Oregon">
+<script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script >
+	$.getJSON("CDPStations.json", function (data) {
+
+            var clientsnpr = [];      // THE ARRAY TO STORE JSON ITEMS.
+            $.each(data, function (index, value) {
+                clientsnpr.push(value);       // PUSH THE VALUES INSIDE THE ARRAY.
+            });
+
+//Rendering data from JSON Object
+        $(document).ready(function(){
+			var number_of_rows = clientsnpr.clients.stations.length;
+			var k = 0;
+			var station_info = '';
+			for(j in clientsnpr.clients.stations){							
+						station_info +='<div class="station-container"><div class="station-logo"><img src="';					
+						station_info +=clientsnpr.clients.stations[k].logo;						
+						station_info +='" alt="';						
+						station_info +=clientsnpr.clients.stations[k].title;						
+						station_info +='"/></div><h2 class="station-title">';
+						station_info +=clientsnpr.clients.stations[k].title;
+						station_info +='</h2><div class="station-address">';
+						station_info +=clientsnpr.clients.stations[k].address.street;
+						station_info +=', ';
+						station_info +=clientsnpr.clients.stations[k].address.city;
+						station_info +=', ';
+						station_info +=clientsnpr.clients.stations[k].address.state;
+						station_info +=' ';
+						station_info +=clientsnpr.clients.stations[k].address.zip;						
+						station_info +='</div><div class="station-description">'
+						station_info +=clientsnpr.clients.stations[k].description;											
+						station_info +='</div></div><div class="hr"></div>';
+				k++;
+            }
+			
+				$('#stations').html(station_info);
+				$( ".hr" ).last().css( "background-color", "#ffffff" );              
+        });
+</script>
+</head>
+<body>
+	<style>
+		body{background:#F9F9F9;padding:20px;}
+		h1{text-transform:uppercase;text-align:center;color: #333;font-weight: 400;font-family:arial;}
+		h2{margin-bottom: 4px;}
+		.page-title{}
+		#stations{max-width:1280px;background:white;margin:auto;border: 1px solid #DFDFDF;}
+		.station-container{padding:30px;padding-bottom:40px;}
+		.station-logo{text-align:center;}
+		@media only screen and (min-width: 601px) {	
+			.station-logo img{height:120px;}
+		} 
+		@media only screen and (max-width: 600px) {			
+			.station-logo img{width:70%;}
+		} 
+		.station-title{font-weight:bold;text-align:center;color: #333;font-weight: 400;font-family:arial;}
+		.station-address{text-align:center;font-size:14px;padding-bottom:20px;color:#767676;font-family:arial;}
+		.station-description{font-family: Georgia,serif;font-size:17px;line-height:1.7;}
+		.hr{height:1px;background: #DFDFDF;margin: 0 30px;}
+	</style>
+	<h1 class="page-title">Our PBS Client Stations</h1>
+	<div id="stations"></div>
+</body>
+</html>
