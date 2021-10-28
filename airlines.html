@@ -148,7 +148,7 @@
 			
 			$.getJSON('airlines.json',function(data){
 				console.log('success');
-				$.each(data,function(i,test){
+				$.each(data,function(i){
 					$('#test').append(name+'<br>');
 				});
 			}).error(function(){
