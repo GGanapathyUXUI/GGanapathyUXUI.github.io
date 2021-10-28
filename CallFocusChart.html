@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Call Focus - Chart View</title>
+<link rel="SHORTCUT ICON" href="http://www.hbs.edu/favicon.ico" />    
+<script type='text/javascript' src='https://poplar.hbs.edu/static/common/libs/jquery/1.6.4/jquery-1.6.4.js'></script>
+<script type='text/javascript' src="https://poplar.hbs.edu/static/common/js/mustache.js"></script>
+<link href="../../../Documents/workspace-sts-2.8.1.RELEASE/SCPT/webroot/css/seatChart.css" type="text/css" rel="stylesheet">
+<link href="../../../Documents/workspace-sts-2.8.1.RELEASE/SCPT/webroot/css/printReports.css" type="text/css" rel="stylesheet">
+
+ 
+
+<script type='text/javascript'>
+$(window).load(function(){
+
+ //link to json file
+ $.getJSON("seatChartCF.json", function(data) { 
+ 
+//var template = '<div id="outerContainerReport"><div class="heading1Report">Call Focus for {{courseName}} - {{sectionName}}</div><div class="spacing"></div><table class="center" cellspacing="0" cellpadding="0"><tr><td><table cellspacing="0" cellpadding="0">{{#students}}{{#row}}<tr id="row">{{#seat}}<td><div id="{{status}}Report" class="{{seatNum}} mostDays{{mostDaysSinceLastParticipationRank}}">{{#firstName}}<div class="centerStudentImage"><div id="student" ><div class="borderDefaultReport plc{{participatedInLastClass}}"><image src="{{#classCard}}{{imageUrlFull}}{{/classCard}}{{prsnId}}.jpg" width="30px" height="32px"/></div></div></div><div id={{firstName}} class="fullNameReport lp{{leastParticipated}} mp{{mostParticipated}}">{{firstName}}<br>{{lastName}}</div>{{/firstName}}</div></div></td>{{/seat}}</tr>{{/row}}{{/students}}</table></td></tr></table></div>';
+
+  var template = '<div id="outerContainerReport"><div class="heading1Report">Call Focus for {{courseName}} - {{sectionName}}</div><div id="legendChart"><span class="lptrue">Red text</span> marks students with least participation.<br><span class="mptrue">Green text</span> marks most participating students.<br><span class="mostDaystrue">Yellow highlighting</span> marks students with most sessions since last participation.<br>Students who spoke in the most recent class are greyed out.</div><div class="spacing"></div><table class="center" cellspacing="0" cellpadding="0"><tr><td><table cellspacing="0" cellpadding="0">{{#students}}{{#row}}<tr id="row">{{#seat}}<td><div id="{{status}}" class="{{seatNum}}  mostDays{{mostDaysSinceLastParticipation}}">{{#firstName}}<div class="centerStudentImage"><div id="student" ><div class="borderDefault plc{{participatedInLastClass}}"><image class="profileImage" src="{{#classCard}}{{imageUrlFull}}{{/classCard}}{{prsnId}}.jpg" width="60px" height="63px"/></div></div></div><div id={{firstName}} class="fullName lp{{leastParticipated}} mp{{mostParticipated}}">{{firstName}}<br>{{lastName}}</div>{{/firstName}}</div></div></td>{{/seat}}</tr>{{/row}}{{/students}}</table></td></tr></table></div>';
+    var html = Mustache.to_html(template, data); 
+    $('div#callFocusChart').html(html);
+    
+$('div#vacant').html('<div class="centerStudentImage"><div id="student" class="student"><div class="borderVacant"></div></div><div class="fullName"></div>');
+ 
+   var template = '<div id="outerContainerReport"><div class="heading1Report">Call Focus for {{courseName}} - {{sectionName}}</div><table id="legendTable"><tr><td><span class="lptrue">Red text</span> marks students with least participation.</td><td><span class="mptrue">Green text</span> marks most participating students.</td></tr><tr><td><span class="mostDaystrue">Yellow highlighting</span> marks students with most sessions since last participation.</td><td>Students who spoke in the most recent class are greyed out.</td></tr></table><div class="spacing"></div><table class="center" cellspacing="0" cellpadding="0"><tr><td><table cellspacing="0" cellpadding="0">{{#students}}{{#row}}<tr id="row">{{#seat}}<td><div id="{{status}}Report" class="mostDays{{mostDaysSinceLastParticipation}}">{{#firstName}}<div><div id="student"><div class="borderDefaultReport plc{{participatedInLastClass}}"><image class="profileImage" src="{{#classCard}}{{imageUrlFull}}{{/classCard}}{{prsnId}}.jpg" width="30px" height="32px"/></div></div></div><div id={{firstName}} class="fullNameReport lp{{leastParticipated}} mp{{mostParticipated}}">{{firstName}}<br>{{lastName}}</div>{{/firstName}}</div></div></td>{{/seat}}</tr>{{/row}}{{/students}}</table></td></tr></table></div>';
+    var html = Mustache.to_html(template, data); 
+    $('div#callFocusChartPrint').html(html);
+    
+ $('div#vacantReport').html('<div class="centerStudentImage"><div id="student" class="student"><div class="borderVacantReport"><image src="" width="30px" height="32px"/></div></div></div><div class="fullNameReport"></div>');
+ 
+   
+   }); // end data
+   
+}); // end window function
+
+ 
+ 
+
+</script>
+
+</head>
+<body>
+
+<!-- Start Menu  -->
+<div class="menuBk web">
+<ul id="pageMenu">
+<li class="floatLeft"><input class="button" type="submit" value="Go back"></li>
+<li><input class="button" type="submit" onclick="printSmallFormat()" value="Print (Small format)"></li>
+<li><input class="button" type="submit" onclick="printLargeFormat()" value="Print (Large format)"></li>
+</ul>
+</div>
+<!-- End Menu  -->
+
+<div id="callFocusChart" class="web"></div>
+
+ 
+<div id="callFocusChartPrint" class="print"></div>
+
+
+</body>
+
+</html>
+ 
