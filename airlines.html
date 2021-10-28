@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kayak</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+	<style>
+		body{font-family: arial;background:#f9fafb;padding:0;margin:0;}
+		
+		#content-container{padding-left:94px;}
+
+		nav{background:#ffffff;border-bottom:1px solid #cccccc;padding:19px 16px;}
+
+
+		h1{font-size:44px;font-weight:900:color:#000000;margin: 67px 94px 73px 0;}
+
+		.filter .title{font-size:16px;font-weight:bold;color:#192024;}
+		.filter-options{font-size:14px;font-weight:normal;color:#192024;padding:23px 0 56px;display: inline-flex}
+		
+		input[type="checkbox" i] {width:20px;height:20px;margin:0 10px 0 0;}
+		label{margin-right:24px;}
+
+		.airline{width:300px;height:240px;background:#ffffff;border-radius:8px; display:inline-flex;vertical-align:middle;margin:0 12px 16px 0;}
+		
+		
+		.airline {
+			border:1px solid #ffffff;
+			-webkit-box-shadow: 0px -1px 4px 0px rgba(25, 32, 36, 0.4);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+			-moz-box-shadow:    0px -1px 4px 0px rgba(25, 32, 36, 0.4);  /* Firefox 3.5 - 3.6 */
+			box-shadow:         0px -1px 4px 0px rgba(25, 32, 36, 0.4);
+			}
+			
+		.airline:hover{
+			border:1px solid #363f45;
+			-webkit-box-shadow: 0px -1px 4px 0px rgba(25, 32, 36, 0.4);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+			-moz-box-shadow:    0px -1px 4px 0px rgba(25, 32, 36, 0.4);  /* Firefox 3.5 - 3.6 */
+			box-shadow:         0px -1px 4px 0px rgba(25, 32, 36, 0.4);
+			
+			
+			
+			}
+			
+		.airline table{margin:0 40px;}
+
+		.airline .logo {width: 35px;display:inline-block;display: table-cell;vertical-align: middle;padding-right: 18px;}
+		.airline .logo img{width:100%;}
+		.airline .details{display:inline-block;display: table-cell;vertical-align: middle;font-size:16px;line-height: 20px;color:#192024;}
+		.airline .details{font-size:14px;}
+		.airline .details p{margin:0;}
+		
+		
+		.hide{display:none;}
+		.display{display:block;}
+		
+		.airline-website{color:#5a6872;}
+		
+		
+		
+		@media only screen and (max-width: 480px) {
+			#content-container {padding-left: 24px;}
+			.airline table {margin: 0 20px;}
+			
+			
+			
+		}
+
+
+
+	</style>
+	
+	<script >
+		//JSON Object 
+		var kayak =  
+		{   
+			"airlines": [
+				
+				{
+					"site": "https://flyUIA.com/ii/en/home",
+					"code": "PS",
+					"alliance": "none",
+					"phone": "+38 (044) 581-50-50",
+					"name": "Ukraine International Airlines",
+					"usName": "Ukraine International Airlines",
+					"__clazz": "com.r9.harmony.httpd.mobileapis.AirlineMobile",
+					"defaultName": "Ukraine International Airlines",
+					"logoURL": "/rimg/provider-logos/airlines/v/PS.png?crop=false&width=108&height=92&fallback=default2.png&_v=d9d949b58188e00fcfa02d4139ecbc2e"
+				},
+				{
+					"site": "https://www.piedmont-airlines.com",
+					"code": "PT",
+					"alliance": "none",
+					"phone": "+1 410 548 2901",
+					"name": "Piedmont Airlines",
+					"usName": "Piedmont Airlines",
+					"__clazz": "com.r9.harmony.httpd.mobileapis.AirlineMobile",
+					"defaultName": "Piedmont Airlines",
+					"logoURL": "/rimg/provider-logos/airlines/v/PT.png?crop=false&width=108&height=92&fallback=default3.png&_v=02d2c121e09c9f9843ae801a80ecd82b"
+				},
+				{
+					"site": "https://40-mileair.com/",
+					"code": "Q5",
+					"alliance": "none",
+					"phone": "(907) 883 5191",
+					"name": "40-Mile Air, Ltd.",
+					"usName": "40-Mile Air, Ltd.",
+					"__clazz": "com.r9.harmony.httpd.mobileapis.AirlineMobile",
+					"defaultName": "40-Mile Air, Ltd.",
+					"logoURL": "/rimg/provider-logos/airlines/v/Q5.png?crop=false&width=108&height=92&fallback=default3.png&_v=9916486c3cdec84c4d3b0fc945b1b431"
+				}
+
+			]
+		} 
+
+		//Rendering data from JSON Object
+		$(document).ready(function(){
+			var number_of_rows = kayak.airlines.length;
+			alert(number_of_rows);
+			var k = 0;
+			
+			var airline_info = '';
+			for(j in kayak.airlines){
+				
+						airline_info +='<div class="airline"><table><tr><td><div class="logo"><img src="';
+						airline_info +='https://www.kayak.com';									
+						airline_info +=kayak.airlines[k].logoURL;
+						airline_info +='"></div><div class="details"><div class="airline-name"><b>';	
+						airline_info +=kayak.airlines[k].name;
+						airline_info +='</b></div><p class="hide">';	
+						airline_info +=kayak.airlines[k].alliance;
+						airline_info +='<br>';
+						airline_info +=kayak.airlines[k].phone;
+						airline_info +='<br><span class="airline-website">';
+						airline_info +=kayak.airlines[k].site;
+						airline_info +='</span></p></div></td></tr></table></div>';
+				k++;
+			}
+			
+				$('#airlines').html(airline_info); 
+		
+			$('.airline').hover(function(){
+				$(this).find( "p" ).toggle();
+			});
+			
+			
+			var dmJSON = "https://www.kayak.com/h/mobileapis/directory/airlines?jsonp";
+			$.getJSON( dmJSON, function(data) {
+				$.each(data.entries, function(i, f) {
+					var tblRow = f.name + "<br>"
+					$(tblRow).appendTo("#test");
+				});
+
+			});
+		
+		});
+		
+		
+		
+	</script>
+	</head>
+	<body>
+		<nav><img src="images/Logo.svg" alt="Kayak" title="Kayak"></nav>
+		<div id="content-container">
+			<h1 class="page-title">Airlines</h1>
+			<div class="filter">
+				<div class="title" style="">Filter by Alliances</div>
+				
+				<form class="filter-options" action="" method="get">
+					  <input type="checkbox" name="Oneword" value="Bike">
+					  <label for="vehicle1"> Oneword</label>
+					  <input type="checkbox" name=" Sky Team" value="Car">
+					  <label for="vehicle2"> Sky Team</label>
+					  <input type="checkbox" name="Star Alliance" value="Boat" checked>
+					  <label for="vehicle3"> Star Alliance</label>
+					  <!--<input type="submit" value="Submit">-->
+				</form>
+			
+			</div>
+			<div id="test"></div>			
+			<div id="airlines"></div>
+		</div>
+	</body>
+</html>
