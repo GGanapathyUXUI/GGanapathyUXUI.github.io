@@ -145,14 +145,16 @@
 			});
 			
 			
-			var dmJSON = "https://www.kayak.com/h/mobileapis/directory/airlines?jsonp";
-			$.getJSON( dmJSON, function(data) {
-				$.each(data.entries, function(i, f) {
-					var tblRow = f.name + "<br>"
-					$(tblRow).appendTo("#test");
+			
+			$.getJSON('airlines.json',function(data){
+				console.log('success');
+				$.each(data,function(i,test){
+					$('#test').append(name+'<br>');
 				});
-
+			}).error(function(){
+				console.log('error');
 			});
+			
 		
 		});
 		
