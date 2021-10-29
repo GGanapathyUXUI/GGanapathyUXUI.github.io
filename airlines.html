@@ -76,16 +76,11 @@
 		
 		//Rendering data from JSON Object
 		$(document).ready(function(){
-			//var number_of_rows = kayak.airlines.length;
-			//alert(number_of_rows);
-			//var k = 0;
-			
-			var airline_info = '';
-						
+									
 			$.getJSON( "https://www.kayak.com/h/mobileapis/directory/airlines?jsonp", function( data ) {
 				$.each(data,function(i, info){
 				$('#test').append(info.name+'<br>');
-					$('#airlines').append(info.logoURL+'<br>');	
+					//$('#airlines').append(info.logoURL+'<br>');	
 				});
 			});
 			
