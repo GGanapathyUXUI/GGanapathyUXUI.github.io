@@ -115,28 +115,41 @@
 		} 
 
 		//Rendering data from JSON Object
-		$(document).ready(function(){
-			var number_of_rows = kayak.airlines.length;
+		//$(document).ready(function(){
+			//var number_of_rows = kayak.airlines.length;
 			//alert(number_of_rows);
-			var k = 0;
+			//var k = 0;
 			
 			var airline_info = '';
-			for(j in kayak.airlines){
+						
+			$.getJSON( "https://www.kayak.com/h/mobileapis/directory/airlines?jsonp", function( data ) {
+				$.each(data,function(i, info){
+					//$('#test').append(info.name+'<br>');
+				
 				
 						airline_info +='<div class="airline"><table><tr><td><div class="logo"><img src="';
 						airline_info +='https://www.kayak.com';									
-						airline_info +=kayak.airlines[k].logoURL;
+						airline_info +=info.logoURL;
 						airline_info +='"></div><div class="details"><div class="airline-name"><b>';	
-						airline_info +=kayak.airlines[k].name;
+						airline_info +=info.name;
 						airline_info +='</b></div><p class="hide">';	
-						airline_info +=kayak.airlines[k].alliance;
+						airline_info +=info.alliance;
 						airline_info +='<br>';
-						airline_info +=kayak.airlines[k].phone;
+						airline_info +=info.phone;
 						airline_info +='<br><span class="airline-website">';
-						airline_info +=kayak.airlines[k].site;
+						airline_info +=info.site;
 						airline_info +='</span></p></div></td></tr></table></div>';
-				k++;
-			}
+				
+				
+				
+				});
+			});
+			
+
+				
+						
+				//k++;
+			//}
 			
 			$('#airlines').html(airline_info); 
 		
@@ -145,11 +158,7 @@
 			});
 			
 					
-			$.getJSON( "https://www.kayak.com/h/mobileapis/directory/airlines?jsonp", function( data ) {
-				$.each(data,function(i, info){
-					$('#test').append(info.name+'<br>');
-				});
-			});
+			
 			
 		
 		});
