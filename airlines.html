@@ -73,49 +73,9 @@
 	
 	<script >
 		//JSON Object 
-		var kayak =  
-		{   
-			"airlines": [
-				
-				{
-					"site": "https://flyUIA.com/ii/en/home",
-					"code": "PS",
-					"alliance": "none",
-					"phone": "+38 (044) 581-50-50",
-					"name": "Ukraine International Airlines",
-					"usName": "Ukraine International Airlines",
-					"__clazz": "com.r9.harmony.httpd.mobileapis.AirlineMobile",
-					"defaultName": "Ukraine International Airlines",
-					"logoURL": "/rimg/provider-logos/airlines/v/PS.png?crop=false&width=108&height=92&fallback=default2.png&_v=d9d949b58188e00fcfa02d4139ecbc2e"
-				},
-				{
-					"site": "https://www.piedmont-airlines.com",
-					"code": "PT",
-					"alliance": "none",
-					"phone": "+1 410 548 2901",
-					"name": "Piedmont Airlines",
-					"usName": "Piedmont Airlines",
-					"__clazz": "com.r9.harmony.httpd.mobileapis.AirlineMobile",
-					"defaultName": "Piedmont Airlines",
-					"logoURL": "/rimg/provider-logos/airlines/v/PT.png?crop=false&width=108&height=92&fallback=default3.png&_v=02d2c121e09c9f9843ae801a80ecd82b"
-				},
-				{
-					"site": "https://40-mileair.com/",
-					"code": "Q5",
-					"alliance": "none",
-					"phone": "(907) 883 5191",
-					"name": "40-Mile Air, Ltd.",
-					"usName": "40-Mile Air, Ltd.",
-					"__clazz": "com.r9.harmony.httpd.mobileapis.AirlineMobile",
-					"defaultName": "40-Mile Air, Ltd.",
-					"logoURL": "/rimg/provider-logos/airlines/v/Q5.png?crop=false&width=108&height=92&fallback=default3.png&_v=9916486c3cdec84c4d3b0fc945b1b431"
-				}
-
-			]
-		} 
-
+		
 		//Rendering data from JSON Object
-		//$(document).ready(function(){
+		$(document).ready(function(){
 			//var number_of_rows = kayak.airlines.length;
 			//alert(number_of_rows);
 			//var k = 0;
@@ -124,7 +84,7 @@
 						
 			$.getJSON( "https://www.kayak.com/h/mobileapis/directory/airlines?jsonp", function( data ) {
 				$.each(data,function(i, info){
-					$('#airlines').append(info.logoURL+'<br>');	
+					$('#airlines').append(info.logoURL+'<>');	
 				});
 			});
 			
