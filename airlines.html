@@ -124,24 +124,7 @@
 						
 			$.getJSON( "https://www.kayak.com/h/mobileapis/directory/airlines?jsonp", function( data ) {
 				$.each(data,function(i, info){
-					//$('#test').append(info.name+'<br>');
-				
-				
-						airline_info +='<div class="airline"><table><tr><td><div class="logo"><img src="';
-						airline_info +='https://www.kayak.com';									
-						airline_info +=info.logoURL;
-						airline_info +='"></div><div class="details"><div class="airline-name"><b>';	
-						airline_info +=info.name;
-						airline_info +='</b></div><p class="hide">';	
-						airline_info +=info.alliance;
-						airline_info +='<br>';
-						airline_info +=info.phone;
-						airline_info +='<br><span class="airline-website">';
-						airline_info +=info.site;
-						airline_info +='</span></p></div></td></tr></table></div>';
-				
-				$('#airlines').append(airline_info); 
-				
+					$('#airlines').append('<div class="airline"><table><tr><td><div class="logo"><img src="https://www.kayak.com'+info.logoURL+'></div><div class="details"><div class="airline-name"><b>'+info.name+'</b></div><p class="hide">'+info.alliance+'<br>'+info.phone+'<br><span class="airline-website">'+info.site+'</span></p></div></td></tr></table></div>');	
 				});
 			});
 			
