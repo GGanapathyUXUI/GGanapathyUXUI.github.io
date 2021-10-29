@@ -12,7 +12,7 @@
 	<style>
 		body{font-family: arial;background:#f9fafb;padding:0;margin:0;}
 		
-		#content-container{padding-left:94px;}
+		#content-container{padding-left:94px;max-width:1280px;}
 
 		nav{background:#ffffff;border-bottom:1px solid #cccccc;padding:19px 16px;}
 
@@ -20,7 +20,8 @@
 		h1{font-size:44px;font-weight:900:color:#000000;margin: 67px 94px 73px 0;}
 
 		.filter .title{font-size:16px;font-weight:bold;color:#192024;}
-		.filter-options{font-size:14px;font-weight:normal;color:#192024;padding:23px 0 56px;display: inline-flex}
+		.filter-options{font-size:14px;font-weight:normal;color:#192024;padding:23px 0 56px;display: inline-flex;}
+		.filter-options br{display:none;}
 		
 		input[type="checkbox" i] {width:20px;height:20px;margin:0 10px 0 0;}
 		label{margin-right:24px;}
@@ -66,9 +67,13 @@
 		
 		@media only screen and (max-width: 768px) {
 			#content-container {}
+			
+			h1{font-size:44px;font-weight:900:color:#000000;margin: 40px 94px 45px 0;}
 			.airline table {margin:0 10px;}
 			#content-container{padding-left:44px;}
 			.filter .title,.filter-options,.airline .details{font-size: 24px;line-height: 30px;}
+			.filter-options(display:inline-block;)
+			.filter-options br(display:block;)
 			.airline .logo {width: 80px; padding-right: 10px;}			
 			
 		}
@@ -144,13 +149,13 @@
 				<div class="title" style="">Filter by Alliances</div>
 				
 				<form class="filter-options" action="" method="get">
-					  <input type="checkbox" class="OW" name="Oneword" value="OW">
-					  <label for="vehicle1"> Oneword</label>
-					  <input type="checkbox" class="ST" name=" Sky Team" value="ST">
-					  <label for="vehicle2"> Sky Team</label>
-					  <input type="checkbox" class="SA" name="Star Alliance" value="SA">
-					  <label for="vehicle3"> Star Alliance</label>
-					  <!--<input type="submit" value="Submit">-->
+					<input type="checkbox" class="OW" name="Oneword" value="OW">
+					<label for="vehicle1"> Oneword</label><br>
+					<input type="checkbox" class="ST" name=" Sky Team" value="ST">
+					<label for="vehicle2"> Sky Team</label><br>
+					<input type="checkbox" class="SA" name="Star Alliance" value="SA">
+					<label for="vehicle3"> Star Alliance</label><br>
+					<!--<input type="submit" value="Submit">-->
 				</form>
 			
 			</div>		
