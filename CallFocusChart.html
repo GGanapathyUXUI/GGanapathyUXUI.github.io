@@ -15,7 +15,7 @@
 $(window).load(function(){
 
  //link to json file
- $.getJSON("seatChartCF.json", function(data) { 
+ $.getJSON("https://gganapathyuxui.github.io/seatChartCF.json", function(data) { 
  
 //var template = '<div id="outerContainerReport"><div class="heading1Report">Call Focus for {{courseName}} - {{sectionName}}</div><div class="spacing"></div><table class="center" cellspacing="0" cellpadding="0"><tr><td><table cellspacing="0" cellpadding="0">{{#students}}{{#row}}<tr id="row">{{#seat}}<td><div id="{{status}}Report" class="{{seatNum}} mostDays{{mostDaysSinceLastParticipationRank}}">{{#firstName}}<div class="centerStudentImage"><div id="student" ><div class="borderDefaultReport plc{{participatedInLastClass}}"><image src="{{#classCard}}{{imageUrlFull}}{{/classCard}}{{prsnId}}.jpg" width="30px" height="32px"/></div></div></div><div id={{firstName}} class="fullNameReport lp{{leastParticipated}} mp{{mostParticipated}}">{{firstName}}<br>{{lastName}}</div>{{/firstName}}</div></div></td>{{/seat}}</tr>{{/row}}{{/students}}</table></td></tr></table></div>';
 
