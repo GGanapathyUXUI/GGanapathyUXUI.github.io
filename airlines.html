@@ -148,8 +148,8 @@
 			
 			$.getJSON( "airlines.json", function( data ) {
 				var items = [];
-				$.each(data.items,function(i,item){
-					$('#test').append(item.name+'<br>');
+				$.each(data,function(i){
+					$('#test').append(name+'<br>');
 				});
 			});
 			
