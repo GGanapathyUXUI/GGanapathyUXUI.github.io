@@ -84,7 +84,8 @@
 						
 			$.getJSON( "https://www.kayak.com/h/mobileapis/directory/airlines?jsonp", function( data ) {
 				$.each(data,function(i, info){
-					$('#airlines').append(info.logoURL+'<>');	
+				$('#test').append(info.name+'<br>');
+					$('#airlines').append(info.logoURL+'<br>');	
 				});
 			});
 			
