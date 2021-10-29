@@ -83,7 +83,7 @@
 					
 			$.getJSON( "https://gganapathyuxui.github.io/airlines.json", function( data ) {
 				$.each(data,function(i, info){
-					$('#airlines').append('<div class="airline"><table><tr><td><div class="logo"><img src="https://www.kayak.com'+info.logoURL+'"></div><div class="details"><div class="airline-name"><b>'+info.name+'</b></div><p class="hide">'+info.alliance+'<br>'+info.phone+'<br><span class="airline-website">'+info.site+'</span></p></div></td></tr></table></div>');
+					$('#airlines').append('<div class="airline '+info.code+'"><table><tr><td><div class="logo"><img src="https://www.kayak.com'+info.logoURL+'"></div><div class="details"><div class="airline-name"><b>'+info.name+'</b></div><p class="hide">'+info.alliance+'<br>'+info.phone+'<br><span class="airline-website">'+info.site+'</span></p></div></td></tr></table></div>');
 				});
 			});
 			
