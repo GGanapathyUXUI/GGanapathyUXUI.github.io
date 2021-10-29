@@ -138,7 +138,7 @@
 				k++;
 			}
 			
-				$('#airlines').html(airline_info); 
+			$('#airlines').html(airline_info); 
 		
 			$('.airline').hover(function(){
 				$(this).find( "p" ).toggle();
@@ -147,10 +147,8 @@
 			
 			
 			$.getJSON( "airlines.json", function( data ) {
-				var items = [];
-				alert(items.length);
-				$.each(data,function(){
-					$('#test').append(items.name+'<br>');
+				$.each(data,function(i, info){
+					$('#test').append(info.name+'<br>');
 				});
 			});
 			
