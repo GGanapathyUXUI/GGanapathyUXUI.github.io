@@ -24,7 +24,7 @@
 		input[type="checkbox" i] {width:20px;height:20px;margin:0 10px 0 0;}
 		label{margin-right:24px;}
 
-		.airline{width:300px;height:240px;background:#ffffff;border-radius:8px; display:inline-flex;vertical-align:middle;margin:0 16px 16px 0;}
+		.airline{width:300px;height:240px;background:transparent;border-radius:8px; display:inline-flex;vertical-align:middle;margin:0 16px 16px 0;}
 		
 		
 		.airline {
@@ -33,8 +33,9 @@
 			-moz-box-shadow:    0px -1px 4px 0px rgba(25, 32, 36, 0.4);  /* Firefox 3.5 - 3.6 */
 			box-shadow:         0px -1px 4px 0px rgba(25, 32, 36, 0.4);
 			}
-			
+		
 		.airline:hover{
+			cursor:auto;
 			border:1px solid #363f45;
 			-webkit-box-shadow: 0px -1px 4px 0px rgba(25, 32, 36, 0.4);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
 			-moz-box-shadow:    0px -1px 4px 0px rgba(25, 32, 36, 0.4);  /* Firefox 3.5 - 3.6 */
@@ -44,25 +45,28 @@
 			
 			}
 			
+			
 		.airline table{margin:0 40px;}
 
 		.airline .logo {width: 35px;display:inline-block;display: table-cell;vertical-align: middle;padding-right: 18px;}
 		.airline .logo img{width:100%;}
 		.airline .details{display:inline-block;display: table-cell;vertical-align: middle;font-size:16px;line-height: 20px;color:#192024;}
 		.airline .details{font-size:14px;}
-		.airline .details p{margin:0;}
+		.airline .details p{margin:0;word-break: break-word;}
 		
 		
 		.hide{display:none;}
 		.display{display:block;}
 		
 		.airline-website{color:#5a6872;}
+		.red{background:red;}
 		
 		
 		
-		@media only screen and (max-width: 480px) {
-			#content-container {padding-left: 24px;}
-			.airline table {margin: 0 20px;}
+		@media only screen and (max-width: 768px) {
+			#content-container {}
+			.airline table {}
+			#content-container{padding-left:44px;}
 			
 			
 			
@@ -72,7 +76,14 @@
 
 	</style>
 	
-	<script >
+	<script>
+	
+	//The alliance field in the JSON objects returned from the API should be used for the Alliance filter shown in the mock ups. The alliance codes map to the following values:
+
+	//ST = “Sky Team”
+	//OW = “Oneworld”
+	//SA = “Star Alliance”
+
 		
 
 		//Rendering data from JSON Object
@@ -83,18 +94,57 @@
 					
 			$.getJSON( "https://gganapathyuxui.github.io/airlines.json", function( data ) {
 				$.each(data,function(i, info){
-					$('#airlines').append('<div class="airline '+info.code+'"><table><tr><td><div class="logo"><img src="https://www.kayak.com'+info.logoURL+'"></div><div class="details"><div class="airline-name"><b>'+info.name+'</b></div><p class="hide">'+info.alliance+'<br>'+info.phone+'<br><span class="airline-website">'+info.site+'</span></p></div></td></tr></table></div>');
+				
+					
+						
+						$('#airlines').append('<div class="airline alliance-'+info.alliance+'"><table><tr><td><div class="logo"><img src="https://www.kayak.com'+info.logoURL+'"></div><div class="details"><div class="airline-name"><b>'+info.name+'</b></div><p class="hide">'+info.alliance+'<br>'+info.phone+'<br><span class="airline-website">'+info.site+'</span></p></div></td></tr></table></div>');
+					
+					
+						$(".airline").hover(function(){
+							$(this).find("p").toggle();
+						});
+					
+					
 				});
 			});
 			
 			
-			$('.airline').hover(function(){
-				$(this).find( "p" ).toggle();
-			});
+			//filter 
+			
+			
+			$('input[type="checkbox"]').click(function() {
+			var avalue = ".alliance-"+$(this).val();
+			alert(avalue);
+			
+						
+            /*  
+				if($(this).prop("checked") == true) {
+					alert("Checkbox is checked.");
+					$(".alliance-none").hide();	
+				}
+				else if($(this).prop("checked") == false) {
+					alert("Checkbox is unchecked.");
+					$(avalue).hide();
+				
+					if($('input[type="checkbox"]').prop("checked") == false) {
+						$(".airline").show();
+					}						
+				}
+			*/
+			
+            });	
+			
+			
+			
+				
 			
 		
+			
+			
 		});
 		
+		
+			
 		
 		
 	</script>
@@ -107,17 +157,21 @@
 				<div class="title" style="">Filter by Alliances</div>
 				
 				<form class="filter-options" action="" method="get">
-					  <input type="checkbox" name="Oneword" value="Bike">
+					  <input type="checkbox" class="OW" name="Oneword" value="OW">
 					  <label for="vehicle1"> Oneword</label>
-					  <input type="checkbox" name=" Sky Team" value="Car">
+					  <input type="checkbox" class="ST" name=" Sky Team" value="ST">
 					  <label for="vehicle2"> Sky Team</label>
-					  <input type="checkbox" name="Star Alliance" value="Boat" checked>
+					  <input type="checkbox" class="SA" name="Star Alliance" value="SA">
 					  <label for="vehicle3"> Star Alliance</label>
 					  <!--<input type="submit" value="Submit">-->
 				</form>
 			
 			</div>		
-			<div id="airlines"></div>
+			<div id="airlines">
+			</div>
+			<script>
+			
+			</script>
 		</div>
 	</body>
 </html>
