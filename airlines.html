@@ -5,6 +5,7 @@
 <title>Kayak</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
@@ -56,96 +57,83 @@
 		
 		
 		.hide{display:none;}
-		.display{display:block;}
+		.display{display:inline-block;}
 		
 		.airline-website{color:#5a6872;}
 		.red{background:red;}
 		
 		
-		
+		/*
 		@media only screen and (max-width: 768px) {
 			#content-container {}
-			.airline table {}
+			.airline table {margin:0 10px;}
 			#content-container{padding-left:44px;}
-			
-			
+			.filter .title,.filter-options,.airline .details{font-size: 24px;line-height: 30px;}
+			.airline .logo {width: 80px; padding-right: 10px;}			
 			
 		}
-
+*/
 
 
 	</style>
 	
 	<script>
 	
-	//The alliance field in the JSON objects returned from the API should be used for the Alliance filter shown in the mock ups. The alliance codes map to the following values:
+		//The alliance field in the JSON objects returned from the API should be used for the Alliance filter shown in the mock ups. The alliance codes map to the following values:
 
-	//ST = “Sky Team”
-	//OW = “Oneworld”
-	//SA = “Star Alliance”
-
+		//ST = “Sky Team”
+		//OW = “Oneworld”
+		//SA = “Star Alliance”
 		
-
-		//Rendering data from JSON Object
-		$(document).ready(function(){
-			
+		/*
+		if airline info is not there, display NA
+		mobile font-sizes to be bigger
 		
+		
+		
+		
+		*/
+		
+		$(document).ready(function(){		
 			
-					
+			//Rendering data from JSON Object		
 			$.getJSON( "https://gganapathyuxui.github.io/airlines.json", function( data ) {
 				$.each(data,function(i, info){
+					$('#airlines').append('<div class="airline alliance-'+info.alliance+'"><table><tr><td><div class="logo"><img src="https://www.kayak.com'+info.logoURL+'"></div><div class="details"><div class="airline-name"><b>'+info.name+'</b></div><p class="hide">'+info.alliance+'<br>'+info.phone+'<br><span class="airline-website">'+info.site+'</span></p></div></td></tr></table></div>');
 				
-					
+					//Display airline details on hover
+					$(".airline").hover(function(){
+						$(this).find("p").toggle();
+					});
 						
-						$('#airlines').append('<div class="airline alliance-'+info.alliance+'"><table><tr><td><div class="logo"><img src="https://www.kayak.com'+info.logoURL+'"></div><div class="details"><div class="airline-name"><b>'+info.name+'</b></div><p class="hide">'+info.alliance+'<br>'+info.phone+'<br><span class="airline-website">'+info.site+'</span></p></div></td></tr></table></div>');
-					
-					
-						$(".airline").hover(function(){
-							$(this).find("p").toggle();
-						});
-					
-					
 				});
 			});
-			
-			
-			//filter 
-			
-			
-			$('input[type="checkbox"]').click(function() {
-			var avalue = ".alliance-"+$(this).val();
-			alert(avalue);
-			
 						
-            /*  
+			//Filter 				
+			$('input[type="checkbox"]').click(function() {			
+				var avalue = ".alliance-"+$(this).val();
+				//alert(avalue);				
+				if($('input[type="checkbox"]').prop("checked") == false) {
+					$(".airline").show();
+				}
 				if($(this).prop("checked") == true) {
-					alert("Checkbox is checked.");
-					$(".alliance-none").hide();	
+					$(avalue).addClass("display");				
 				}
 				else if($(this).prop("checked") == false) {
-					alert("Checkbox is unchecked.");
-					$(avalue).hide();
-				
-					if($('input[type="checkbox"]').prop("checked") == false) {
-						$(".airline").show();
-					}						
+					$(avalue).removeClass("display");			
 				}
-			*/
-			
+				$(".airline").hide();
+				$(".display").show();
+				var displays = $(".display").length;
+				//alert(displays);
+				
+				//Show all airlines if no checkboxes are checked
+				if (displays < 1){
+					$(".airline").show();
+				};		
             });	
 			
-			
-			
-				
-			
-		
-			
-			
 		});
-		
-		
-			
-		
 		
 	</script>
 	</head>
