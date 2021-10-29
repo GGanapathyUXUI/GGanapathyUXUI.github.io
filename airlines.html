@@ -117,7 +117,7 @@
 		//Rendering data from JSON Object
 		$(document).ready(function(){
 			var number_of_rows = kayak.airlines.length;
-			alert(number_of_rows);
+			//alert(number_of_rows);
 			var k = 0;
 			
 			var airline_info = '';
@@ -148,8 +148,9 @@
 			
 			$.getJSON( "airlines.json", function( data ) {
 				var items = [];
-				$.each(data,function(i){
-					$('#test').append(i.name+'<br>');
+				alert(items.length);
+				$.each(data,function(){
+					$('#test').append(items.name+'<br>');
 				});
 			});
 			
