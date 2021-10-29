@@ -147,13 +147,10 @@
 			
 			
 			$.getJSON( "airlines.json", function( data ) {
-				console.log('success');
 				var items = [];
 				$.each(data.items,function(i,item){
 					$('#test').append(item.name+'<br>');
 				});
-			}).error(function(){
-				console.log('error');
 			});
 			
 		
