@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">		
+		<title>Kayak</title>
+		<meta name="description" content="KAYAK is a travel search engine. KAYAK searches hundreds of travel sites to help you find and book the flight or hotel that suits you best." />
+		<meta name="keywords" content="Airlines,Oneworld, Sky Team, Star Alliance">
+		<link rel="icon" type="image/x-icon" href="https://content.r9cdn.net/res/images/horizon/common/seo/apple-touch-icon-60x60.png">
+		<script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<style>
+			body{font-family: arial;background:#f9fafb;padding:0;margin:0;}	/*Using Arial for HelveticaNeue on Windows*/
+			#content-container{padding-left:94px;max-width:1280px;}
+			nav{background:#ffffff;border-bottom:1px solid #cccccc;padding:19px 16px 16px;}/* Allowing for white space on image bottom*/
+			h1{font-size:44px;font-weight:700;color:#000000;margin: 67px 94px 73px 0;line-height: 36px;}
+			.filter .title{font-size:16px;font-weight:bold;color:#192024;}
+			.filter-options{font-size:14px;font-weight:normal;color:#192024;padding:23px 0 56px;display: inline-flex;}
+			.filter-options br{display:none;}		
+			input[type="checkbox" i] {width:20px;height:20px;margin:0 10px 0 0;}
+			label{margin-right:24px;}
+			#loading{font-style:italic;color:gray;}
+			#airlines{margin-bottom:40px;}
+			.airline{width:280px;height:220px;padding:10px;background:transparent;border-radius:8px; display:inline-flex;vertical-align:middle;margin:0 16px 16px 0;}	
+			.airline {
+				border:1px solid #ffffff;
+				-webkit-box-shadow: 0px -1px 4px 0px rgba(25, 32, 36, 0.4);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+				-moz-box-shadow:    0px -1px 4px 0px rgba(25, 32, 36, 0.4);  /* Firefox 3.5 - 3.6 */
+				box-shadow:         0px -1px 4px 0px rgba(25, 32, 36, 0.4);
+				}
+			.airline:hover{
+				cursor:auto;
+				border:1px solid #363f45;
+				-webkit-box-shadow: 0px -1px 4px 0px rgba(25, 32, 36, 0.4);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+				-moz-box-shadow:    0px -1px 4px 0px rgba(25, 32, 36, 0.4);  /* Firefox 3.5 - 3.6 */
+				box-shadow:         0px -1px 4px 0px rgba(25, 32, 36, 0.4);			
+				}
+			.airline table{margin:0 auto;}
+			.airline .logo {width: 32px;display:inline-block;display: table-cell;vertical-align: middle;padding-right: 18px;}
+			.airline .logo img{width:100%;}
+			.airline .details{display:inline-block;display: table-cell;vertical-align: middle;font-size:16px;line-height: 20px;color:#192024;}
+			.airline .airline-name{font-size:16px;}
+			.airline-font{font-size:14px!important;}
+			.airline .details{font-size:14px;}
+			.airline .details .hide{margin:0;word-break: break-word;}	
+			.hide{display:none;}
+			.display{display:inline-flex;}		
+			.airline-website a{color:#5a6872;text-decoration:none;}
+			.nav-to-top{width: 20px; border: 1px solid #bbbbbb; padding: 20px; position: fixed; bottom: 20px; right: 20px; background: #ffffff; opacity: .4;border-radius: 4px;}
+			.nav-to-top:hover{opacity:1;}
+			.nav-to-top img{width:100%;}
+			
+			/* Optional mobile styles for efficient space utilization and improved readability*/
+			@media only screen and (max-width: 768px) {
+				#content-container {}				
+				h1{font-size:44px;font-weight:900:color:#000000;margin: 40px 94px 45px 0;}
+				#content-container{padding-left:44px;}
+				.filter .title,.airline .details,#loading{font-size: 20px;line-height: 26px;}			
+				.filter-options{font-size: 20px;display:inline-block;line-height:40px;}
+				.filter-options br{display:block;}
+				input[type="checkbox" i] {width:30px;height:30px;}
+				.airline .logo {width: 60px; padding-right: 10px;}	
+				.airline .airline-name{font-size:22px!important;}	
+				.airline-name.airline-font{font-size:20px!important;}
+				.nav-to-top{width: 40px; }				
+			}
+		</style>	
+		<script>
+		
+			/* Notes			
+			
+			
+			Optional implementations included	
+			----------------------------------
+			
+			* Airline website links to URL provided in JSON
+			* Navigation to top of the page while scrolling
+			* Fonts, page gutter and white space optimized for mobile view		
+			
+			
+			*/
+			
+			$(document).ready(function(){	
+
+				$('#loading').show();
+				
+				//Render data from JSON Object		
+				$.getJSON( "https://gganapathyuxui.github.io/airlines.json", function( data ) {
+					$.each(data,function(i, info){
+					
+						$('#loading').show();
+						//Display alliance code values
+						var alliance;						
+						if (info.alliance == "none"){
+							var alliance = "";
+						}
+						if (info.alliance == "SA"){
+							var alliance = "Star Alliance";
+						}
+						if (info.alliance == "OW"){
+							var alliance = "Oneworld";
+						}
+						if (info.alliance == "ST"){
+							var alliance = "Sky Team";
+						}
+						
+						$('#airlines').append('<div class="airline alliance-'+info.alliance+'"><table><tr><td><div class="logo"><img src="https://www.kayak.com'+info.logoURL+'" alt="'+info.name+'" title="'+info.name+'"></div><div class="details"><div class="airline-name"><b>'+info.name+'</b></div><div class="hide"><div class="airline-alliance">'+alliance+'</div><div class="airline-phone">'+info.phone+'</div><div class="airline-website"><a href="'+info.site+'" target="_blank">'+info.site+'</a></div></p></div></td></tr></table></div>');
+											
+						//Display airline details on hover
+						$(".airline").hover(function(){
+							$(this).find(".airline-name").addClass("airline-font");
+							$(this).find(".hide").show();
+							}, function(){
+							$(this).find(".airline-name").removeClass("airline-font");
+							$(this).find(".hide").hide();
+						});						
+						
+						$('#loading').hide();
+						$('.nav-to-top').show();
+						
+					});
+				});			
+				
+							
+				//Filter 				
+				$('input[type="checkbox"]').click(function() {			
+					var avalue = ".alliance-"+$(this).val();
+									
+					if($('input[type="checkbox"]').prop("checked") == false) {
+						$(".airline").show();
+					}
+					if($(this).prop("checked") == true) {
+						$(avalue).addClass("display");				
+					}
+					else if($(this).prop("checked") == false) {
+						$(avalue).removeClass("display");			
+					}
+					$(".airline").hide();
+					$(".display").show();
+					var displays = $(".display").length;
+					
+					
+					//Show all airlines if no checkboxes are checked
+					if (displays < 1){
+						$(".airline").show();
+					};		
+				});	
+				
+			});
+			
+		</script>
+	</head>
+	<body>
+		<nav id="top"><img src="Logo.svg" alt="Kayak" title="Kayak"></nav>
+		<div id="content-container">
+			<h1 class="page-title">Airlines</h1>
+			<div class="filter">
+				<div class="title" style="">Filter by Alliances</div>
+				<form class="filter-options" action="" method="get">
+					<input type="checkbox" class="OW" name="Oneword" value="OW">
+					<label for="vehicle1"> Oneword</label><br>
+					<input type="checkbox" class="ST" name=" Sky Team" value="ST">
+					<label for="vehicle2"> Sky Team</label><br>
+					<input type="checkbox" class="SA" name="Star Alliance" value="SA">
+					<label for="vehicle3"> Star Alliance</label><br>
+					<!--<input type="submit" value="Submit">-->
+				</form>			
+			</div>	
+			<div id="loading">Loading...</div>
+			<div id="airlines"></div>
+			<div class="nav-to-top" style="display:none;"><a href="#top"><img alt="Go to top of the page" title="Go to top of the page" src="images/arrow-up.jpg"/></a></div>
+		</div>
+	</body>
+</html>
